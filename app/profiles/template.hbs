@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h2 class="title">Profiles:</h2>
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |profile|}}
+          {{#unless profile.isNew}}
+            <tr>
+              <td>{{profile.name}}</td>
+              <td>{{profile.description}}</td>
+              <td class="text-center">
+                {{link-to 'Details' 'profile' profile.id class="btn btn-primary btn-xs"}}
+                {{!-- <button class="btn btn-default btn-xs" disabled="{{if profile.active true}}" {{action 'setActive' profile}}>Make Active</button>
+                <button class="btn btn-default btn-xs" disabled="{{unless profile.active true}}" {{action 'setInactive' profile}}>Inactivate</button> --}}
+              </td>
+            </tr>
+          {{/unless}}
+        {{else}}
+          <tr>
+            <td>
+              No Profiles Available...
+            </td>
+          </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-4">
+    {{outlet}}
+  </div>
+</div>

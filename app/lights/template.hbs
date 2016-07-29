@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-10">
+    <h2 class="title">Lights:</h2>
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Serial</th>
+          <th>Zone Id</th>
+          <th>Manage</th>
+        </tr>
+      </thead>
+
+
+      <tbody style="height: 400px; overflow-y: scroll;">
+        {{#each model as |light|}}
+          {{#unless light.isNew}}
+            <tr>
+              <td>{{light.name}}</td>
+              <td>{{light.serial}}</td>
+              <td>{{light.zone_id}}</td>
+              <td class="text-center">
+                {{link-to 'Details' 'light' light.id class="btn btn-primary btn-xs"}}
+              </td>
+            </tr>
+          {{/unless}}
+        {{else}}
+          {{#if true}}
+            <tr>
+              <td>
+                {{folding-cube}}
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              <td>
+                No Lights Available...
+              </td>
+            </tr>
+          {{/if}}
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-2">
+    {{outlet}}
+  </div>
+</div>

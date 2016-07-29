@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-10">
+    <h2 class="title">Zones:</h2>
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Flags</th>
+          <th>Manage</th>
+        </tr>
+      </thead>
+
+
+      <tbody style="height: 400px; overflow-y: scroll;">
+        {{#each model as |zone|}}
+          {{#unless zone.isNew}}
+            <tr>
+              <td>{{zone.name}}</td>
+              <td>{{zone.description}}</td>
+              <td>{{zone.flags}}</td>
+              <td class="text-center">
+                {{!-- {{link-to 'Display' 'light' light.id class="btn btn-primary btn-xs"}} --}}
+              </td>
+            </tr>
+          {{/unless}}
+        {{else}}
+          <tr>
+            <td>
+              No Zones Available...
+            </td>
+          </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-2">
+    {{outlet}}
+  </div>
+</div>

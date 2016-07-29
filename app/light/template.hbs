@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    {{outlet}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 well">
+    <h2 class="text-center">{{model.name}}</h2>
+    <br>
+    <h4>Description: {{if model.description model.description 'No Description...'}}</h4>
+    <br>
+    <h5>Serial: {{model.serial}}</h5>
+    <h5>SN: {{model.sn}}</h5>
+    <h5>Zone ID: {{model.zone_id}}</h5>
+    <h5>Room UUID: {{model.room_uuid}}</h5>
+    <h5>Position X axis: {{model.pos_x}}</h5>
+    <h5>Position Y axis: {{model.pos_y}}</h5>
+  </div>
+</div>

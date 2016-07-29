@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-sm-8">
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>LRA address</th>
+          {{!-- <th>LRA Key</th> --}}
+          <th>Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |appliance|}}
+          {{#unless appliance.isNew}}
+            <tr>
+              <td>{{appliance.name}}</td>
+              <td>{{appliance.url}}</td>
+              {{!-- <td>{{appliance.key}}</td> --}}
+              <td class="text-center">
+                {{link-to 'Details' 'appliance' appliance.id class="btn btn-primary btn-xs"}}
+                <button class="btn btn-default btn-xs" disabled="{{if appliance.active true}}" {{action 'setActive' appliance}}>Connect</button>
+                <button class="btn btn-default btn-xs" disabled="{{unless appliance.active true}}" {{action 'setInactive' appliance}}>Disconnect</button>
+              </td>
+            </tr>
+          {{/unless}}
+        {{else}}
+          <tr>
+            <td>
+              No LightRules Appliances entered...
+            </td>
+          </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-4">
+    {{outlet}}
+  </div>
+</div>
+
+
+{{!-- {{#bs-modal title="New Appliance"}}
+  {{outlet}}
+{{/bs-modal}} --}}

@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    {{outlet}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 well">
+    <h2 class="text-center">{{model.name}}</h2>
+    <br>
+    <h4>Description: {{model.description}}</h4>
+    <br>
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Zone Name</th>
+          <th>Zone ID</th>
+          <th>Active Level</th>
+          <th>Inactive Level</th>
+          <th>Delay</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model.profile_rules as |profile_rule|}}
+          <tr>
+            <td>{{profile_rule.zone_name}}</td>
+            <td>{{profile_rule.zone_id}}</td>
+            <td>{{profile_rule.rule_active}}</td>
+            <td>{{profile_rule.rule_inactive}}</td>
+            <td>{{profile_rule.rule_delay}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+
+  </div>
+</div>

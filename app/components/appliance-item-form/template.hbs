@@ -1,0 +1,29 @@
+<form>
+  <div class="form-group has-feedback {{if item.nameNotValid 'has-success'}}">
+    <label class="control-label">Name*</label>
+    {{input type="text" value=item.name class="form-control" placeholder="Enter a name for the appliance"}}
+    {{#if item.nameNotValid}}
+      <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+    {{/if}}
+  </div>
+  <div class="form-group has-feedback {{if item.ipIsValid 'has-success'}}">
+    <label class="control-label">Appliance IP*</label>
+    {{input type="text" value=item.ip class="form-control" placeholder="192.168.1.1"}}
+    {{#if item.ipIsValid}}
+      <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+    {{/if}}
+  </div>
+  <div class="form-group has-feedback {{if item.keyNotValid 'has-success'}}">
+    <label class="control-label">Authorization API Key*</label>
+    {{input value=item.key rows="6" class="form-control" placeholder="Enter the user API key"}}
+    {{#if item.keyNotValid}}
+      <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <div class="">
+      <button type="submit" class="btn btn-default btn-block" disabled={{unless item.isDisabled true}}  {{action 'buttonClicked' item}}>{{buttonLabel}}</button>
+      <button class="btn btn-danger btn-block" {{action 'cancel' item}}>Cancel</button>
+    </div>
+  </div>
+</form>
