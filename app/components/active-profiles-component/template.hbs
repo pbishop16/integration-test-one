@@ -1,0 +1,10 @@
+
+<div class="" style="width: 100%;">
+  {{!-- {{#if receivedProfiles}} --}}
+    <ul class="list-group">
+      {{#each pulledProfiles as |activeProfile|}}
+        {{active-profile-item activeProfile=activeProfile}}
+      {{/each}}
+    </ul>
+  {{!-- {{/if}} --}}
+</div>

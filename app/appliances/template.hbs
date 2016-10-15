@@ -1,11 +1,10 @@
 <div class="row">
   <div class="col-sm-8">
-    <table class="table table-stripped">
+    {{!-- <table class="table table-stripped">
       <thead>
         <tr>
           <th>Name</th>
           <th>LRA address</th>
-          {{!-- <th>LRA Key</th> --}}
           <th>Manage</th>
         </tr>
       </thead>
@@ -15,7 +14,6 @@
             <tr>
               <td>{{appliance.name}}</td>
               <td>{{appliance.url}}</td>
-              {{!-- <td>{{appliance.key}}</td> --}}
               <td class="text-center">
                 {{link-to 'Details' 'appliance' appliance.id class="btn btn-primary btn-xs"}}
                 <button class="btn btn-default btn-xs" disabled="{{if appliance.active true}}" {{action 'setActive' appliance}}>Connect</button>
@@ -32,7 +30,42 @@
         {{/each}}
 
       </tbody>
-    </table>
+    </table> --}}
+    {{#each model as |appliance|}}
+      {{#unless appliance.isNew}}
+        <div class="">
+          <div class="panel col-sm-12">
+            <div class="panel-heading">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="row"><h4>{{appliance.name}}</h4></div>
+                    <div class="row"><h5><a href="http://{{appliance.url}}" target='_blank'>{{appliance.url}}</a></h5></div>
+                  </div>
+                  <div class="col-sm-9">
+                    {{link-to 'Details' 'appliance' appliance.id class="btn btn-primary"}}
+                    {{#link-to 'appliance.edit' appliance.id class="btn btn-primary" disabled=appliance.active}}{{fa-icon 'edit'}}{{/link-to}}
+                    <button class="btn btn-default pull-right" disabled="{{unless appliance.active true}}" {{action 'setInactive' appliance}}>Disconnect</button>
+                    <button class="btn btn-default pull-right" disabled="{{if appliance.active true}}" {{action 'setActive' appliance}}>Connect</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <a class="col-sm-3" href="#">Lights <span class="badge">{{appliance.lightsCount}}</span></a>
+                <a class="col-sm-3" href="#">Zones <span class="badge">{{appliance.zonesCount}}</span></a>
+                <a class="col-sm-3" href="#">Profiles <span class="badge">{{appliance.profilesCount}}</span></a>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-sm-6">Last Update: {{appliance.updatedAt}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/unless}}
+    {{/each}}
   </div>
   <div class="col-sm-4">
     {{outlet}}

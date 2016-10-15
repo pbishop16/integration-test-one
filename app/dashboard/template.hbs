@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-sm-4">
+    <div class="panel dashboard-general-panel">
+      <div class="panel-heading"><h4>Profiles <span class="badge">{{profiles.length}}</span></h4></div>
+      <div class="panel-body">
+        <table class="table table-condensed table-stripped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each profiles as |profile|}}
+              {{#unless profile.isNew}}
+                <tr>
+                  <td>{{profile.name}}</td>
+                  <td>{{profile.description}}</td>
+                  <td class="text-center">
+                    {{link-to 'Details' 'profile' profile.id class="btn btn-primary btn-xs"}}
+                  </td>
+                </tr>
+              {{/unless}}
+            {{else}}
+              <tr>
+                <td>
+                  No Profiles Available...
+                </td>
+              </tr>
+            {{/each}}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel dashboard-general-panel">
+      <div class="panel-heading"><h4>Lights <span class="badge">{{lights.length}}</span></h4></div>
+      <div class="panel-body">
+        <table class="table table-condensed table-stripped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Serial</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody style="height: 400px; overflow-y: scroll;">
+            {{#each lights as |light|}}
+              {{#unless light.isNew}}
+                <tr>
+                  <td>{{light.name}}</td>
+                  <td>{{light.serial}}</td>
+                  <td class="text-center">
+                    {{link-to 'Details' 'light' light.id class="btn btn-primary btn-xs"}}
+                  </td>
+                </tr>
+              {{/unless}}
+            {{else}}
+              {{#if true}}
+                <tr>
+                  <td>
+                    {{folding-cube}}
+                  </td>
+                </tr>
+              {{else}}
+                <tr>
+                  <td>
+                    No Lights Available...
+                  </td>
+                </tr>
+              {{/if}}
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel dashboard-general-panel">
+      <div class="panel-heading"><h4>Zones <span class="badge">{{zones.length}}</span></h4></div>
+      <div class="panel-body">
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Flags</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody style="height: 400px; overflow-y: scroll;">
+            {{#each zones as |zone|}}
+              {{#unless zone.isNew}}
+                <tr>
+                  <td>{{zone.name}}</td>
+                  <td>{{zone.flags}}</td>
+                  <td class="text-center">
+                    {{!-- {{link-to 'Display' 'light' light.id class="btn btn-primary btn-xs"}} --}}
+                  </td>
+                </tr>
+              {{/unless}}
+            {{else}}
+              <tr>
+                <td>
+                  No Zones Available...
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,10 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
 
-export default DS.Model.extend({
-  rule_active: DS.attr(),
-  rule_delay: DS.attr(),
-  rule_inactive: DS.attr(),
-  zone_id: DS.attr(),
-  zone_name: DS.attr()
+export default Model.extend({
+  rule_active: attr(),
+  rule_delay: attr(),
+  rule_inactive: attr(),
+  zone_id: attr(),
+  zone_name: attr()
 });

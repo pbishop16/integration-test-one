@@ -1,5 +1,5 @@
-import ProfileAdapter from '../profile/adapter';
+import ApplicationAdapter from '../application/adapter';
 
-export default ProfileAdapter.extend({
-  // Receive the delegated properties from the Profile Adapter
+export default ApplicationAdapter.extend({
+  // Receive the delegated properties from the Application Adapter
 });

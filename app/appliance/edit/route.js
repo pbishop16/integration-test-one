@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Route.extend({
   notify: Ember.inject.service(),
@@ -12,6 +13,7 @@ export default Ember.Route.extend({
   },
   actions: {
     saveAppliance(updateAppliance) {
+      updateAppliance.set('updatedAt', moment().format('MMM Do YY, h:mm a'));
       updateAppliance.save().then(() => this.transitionTo('appliances'));
       this.get('notify').success('Appliance successfully added.');
     },

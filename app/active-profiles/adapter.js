@@ -1,5 +1,8 @@
 import ApplicationAdapter from '../application/adapter';
+import Ember from 'ember';
 
 export default ApplicationAdapter.extend({
-  // Receive the delegated properties from the Application Adapter
+  pathForType(type) {
+    return Ember.String.underscore(type);
+  }
 });

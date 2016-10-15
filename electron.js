@@ -2,8 +2,9 @@
 'use strict';
 
 const electron             = require('electron');
-// const {Menu}               = require('electron');
 const path                 = require('path');
+// const defaultMenu          = require('electron-default-menu');
+// const Menu                 = require('menu');
 const {app, BrowserWindow} = electron;
 const dirname              = __dirname || path.resolve(path.dirname());
 const emberAppLocation     = `file://${dirname}/dist/index.html`;
@@ -20,150 +21,181 @@ let mainWindow = null;
 //     autoSubmit: true
 // });
 
-// const template = [
-//   {
-//     label: 'Edit',
-//     submenu: [
-//       {
-//         role: 'undo'
-//       },
-//       {
-//         role: 'redo'
-//       },
-//       {
-//         type: 'separator'
-//       },
-//       {
-//         role: 'cut'
-//       },
-//       {
-//         role: 'copy'
-//       },
-//       {
-//         role: 'paste'
-//       },
-//       {
-//         role: 'pasteandmatchstyle'
-//       },
-//       {
-//         role: 'delete'
-//       },
-//       {
-//         role: 'selectall'
-//       }
-//     ]
-//   },
-//   {
-//     label: 'View',
-//     submenu: [
-//       {
-//         label: 'Reload',
-//         accelerator: 'CmdOrCtrl+R',
-//         click (item, focusedWindow) {
-//           if (focusedWindow) focusedWindow.reload()
-//         }
-//       },
-//       {
-//         role: 'togglefullscreen'
-//       },
-//       {
-//         label: 'Toggle Developer Tools',
-//         accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-//         click (item, focusedWindow) {
-//           if (focusedWindow) focusedWindow.webContents.toggleDevTools()
-//         }
-//       }
-//     ]
-//   },
-//   {
-//     role: 'window',
-//     submenu: [
-//       {
-//         role: 'minimize'
-//       },
-//       {
-//         role: 'close'
-//       }
-//     ]
-//   },
-//   {
-//     role: 'help',
-//     submenu: [
-//       {
-//         label: 'Learn More',
-//         click () { require('electron').shell.openExternal('http://electron.atom.io') }
-//       }
-//     ]
-//   }
-// ]
-//
-// if (process.platform === 'darwin') {
-//   const name = require('electron').app.getName()
-//   template.unshift({
-//     label: name,
-//     submenu: [
-//       {
-//         role: 'about'
-//       },
-//       {
-//         type: 'separator'
-//       },
-//       {
-//         role: 'services',
-//         submenu: []
-//       },
-//       {
-//         type: 'separator'
-//       },
-//       {
-//         role: 'hide'
-//       },
-//       {
-//         role: 'hideothers'
-//       },
-//       {
-//         role: 'unhide'
-//       },
-//       {
-//         type: 'separator'
-//       },
-//       {
-//         role: 'quit'
-//       }
-//     ]
-//   })
-//   // Window menu.
-//   template[3].submenu = [
-//     {
-//       label: 'Close',
-//       accelerator: 'CmdOrCtrl+W',
-//       role: 'close'
-//     },
-//     {
-//       label: 'Minimize',
-//       accelerator: 'CmdOrCtrl+M',
-//       role: 'minimize'
-//     },
-//     {
-//       label: 'Zoom',
-//       role: 'zoom'
-//     },
-//     {
-//       type: 'separator'
-//     },
-//     {
-//       label: 'Bring All to Front',
-//       role: 'front'
-//     }
-//   ]
-// }
-//
-// const menu = Menu.buildFromTemplate(template);
-// Menu.setApplicationMenu(menu);
+const {Menu} = require('electron')
+
+const template = [
+  {
+    label: 'Edit',
+    submenu: [
+      {
+        label: 'Undo',
+        accelerator: 'CmdOrCtrl+Z',
+        role: 'undo'
+      },
+      {
+        label: 'Redo',
+        accelerator: 'Shift+CmdOrCtrl+Z',
+        role: 'redo'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Cut',
+        accelerator: 'CmdOrCtrl+X',
+        role: 'cut'
+      },
+      {
+        label: 'Copy',
+        accelerator: 'CmdOrCtrl+C',
+        role: 'copy'
+      },
+      {
+        label: 'Paste',
+        accelerator: 'CmdOrCtrl+V',
+        role: 'paste'
+      },
+      {
+        label: 'Select All',
+        accelerator: 'CmdOrCtrl+A',
+        role: 'selectall'
+      }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      {
+        label: 'Reload',
+        accelerator: 'CmdOrCtrl+R',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.reload()
+        }
+      },
+      {
+        label: 'Toggle Full Screen',
+        accelerator: (function() {
+          if (process.platform === 'darwin')
+            return 'Ctrl+Command+F';
+          else
+            return 'F11';
+        })(),
+        click: function(item, focusedWindow) {
+          if (focusedWindow)
+            focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+        }
+      },
+      {
+        label: 'Toggle Developer Tools',
+        accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+        }
+      }
+    ]
+  },
+  {
+    label: 'Window',
+    role: 'window',
+    submenu: [
+      {
+        label: 'Minimize',
+        accelerator: 'CmdOrCtrl+M',
+        role: 'minimize'
+      },
+      {
+        label: 'Close',
+        accelerator: 'CmdOrCtrl+W',
+        role: 'close'
+      }
+    ]
+  },
+  {
+    label: 'Help',
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click () { require('electron').shell.openExternal('http://electron.atom.io') }
+      }
+    ]
+  }
+]
+
+if (process.platform === 'darwin') {
+  const name = require('electron').app.getName();
+  template.unshift({
+    label: name,
+    submenu: [
+      {
+        label: 'About ' + name,
+        role: 'about'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Services',
+        role: 'services',
+        submenu: []
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Hide ' + name,
+        accelerator: 'Command+H',
+        role: 'hide'
+      },
+      {
+        label: 'Hide Others',
+        accelerator: 'Command+Shift+H',
+        role: 'hideothers'
+      },
+      {
+        label: 'Show All',
+        role: 'unhide'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        click: function() { app.quit(); }
+      }
+    ]
+  })
+  // Window menu.
+  template[3].submenu = [
+    {
+      label: 'Close',
+      accelerator: 'CmdOrCtrl+W',
+      role: 'close'
+    },
+    {
+      label: 'Minimize',
+      accelerator: 'CmdOrCtrl+M',
+      role: 'minimize'
+    },
+    {
+      label: 'Zoom',
+      role: 'zoom'
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: 'Bring All to Front',
+      role: 'front'
+    }
+  ]
+}
+
+
 
 app.on('window-all-closed', function onWindowAllClosed() {
     if (process.platform !== 'darwin') {
-        // Menu.setApplicationMenu(menu);
         app.quit();
     }
 });
@@ -210,7 +242,12 @@ app.on('ready', function onReady() {
         mainWindow = null;
     });
 
-    // Menu.setApplicationMenu(menu);
+    // const menu = defaultMenu();
+    //
+    // Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+
+    const menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
 
     // Handle an unhandled error in the main thread
     //

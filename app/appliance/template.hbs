@@ -5,14 +5,42 @@
 </div>
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3 well">
-    <h2 class="text-center">{{model.name}}</h2>
-    <br>
-    <h4>Address: http://{{model.url}}</h4>
-    <h5>Key: {{model.key}}</h5>
-    <br>
-    <div class="pull-right">
-      {{#link-to 'appliance.edit' model.id class="btn btn-primary"}}Edit{{/link-to}}
-      <button type="button" name="Delete" class="btn btn-danger" {{action 'deleteAppliance' model}}>Delete</button>
+    <div class="container-fluid">
+      <div class="row">
+        <h2 class="text-center">{{model.name}}</h2>
+        <br>
+        <h4>Address: http://{{model.url}}</h4>
+        <h5>Key: {{model.key}}</h5>
+        <br>
+        <div class="pull-right">
+          {{#link-to 'appliance.edit' model.id class="btn btn-primary" disabled=model.active}}{{fa-icon 'edit'}}{{/link-to}}
+          <button type="button" name="Delete" class="btn btn-danger" {{action 'deleteAppliance' model}}>{{fa-icon 'trash'}}</button>
+        </div>
+      </div>
+      <div class="row">
+        <h4>Active Profiles:</h4>
+      </div>
+      <div class="row" style="height: 130px;">
+        {{!-- Create Data Loading Component --}}
+        {{!-- {{#each model.activeProfiles as |activeProfile|}}
+          <div class="panel col-sm-12">
+            <div class="panel-heading">
+              <h4>{{activeProfile.profile.name}}</h4>
+              <p>
+                {{activeProfile.schedule.name}}
+              </p>
+            </div>
+            <div class="panel-body">
+
+            </div>
+          </div>
+        {{/each}} --}}
+        {{#if model.active}}
+          <div class="col-sm-12">
+            {{active-profiles-component receivedProfiles=pulledProfiles}}
+          </div>
+        {{/if}}
+      </div>
     </div>
   </div>
 </div>

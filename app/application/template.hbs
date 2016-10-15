@@ -13,16 +13,24 @@
             </div>
             <div class="row">
               <div class=" text-center">
-                <h4 class="">Connected To: {{if currentAppliance currentAppliance 'No Connected Appliance'}}</h4>
+                {{!-- <h4 class="">Connected To: {{if currentAppliance currentAppliance 'No Connected Appliance'}}</h4> --}}
+                <h4>
+                  {{#if currentAppliance}}
+                    Connected To: <a href={{currentAppliance}} target='_blank'>{{currentAppliance}}</a>
+                  {{else}}
+                    No Connected Appliance
+                  {{/if}}
+                </h4>
               </div>
             </div>
           </div>
         </div>
         <div class="row text-center">
-          {{link-to 'Home' 'index' class="btn btn-primary"}}
+          {{#link-to 'index' class="btn btn-primary"}}{{fa-icon 'home'}}{{/link-to}}
           {{link-to 'Appliances' 'appliances' class="btn btn-primary"}}
           {{link-to 'New Appliance' 'appliances.new' class="btn btn-success"}}
           {{#if currentAppliance}}
+            {{link-to 'Dashboard' 'dashboard' class="btn btn-primary"}}
             {{link-to 'Profiles' 'profiles' class="btn btn-default"}}
             {{link-to 'Lights' 'lights' class="btn btn-default"}}
             {{link-to 'Zones' 'zones' class="btn btn-default"}}

@@ -7,6 +7,8 @@ export default Model.extend({
   serial: attr(),
   zone_id: attr(),
   room_uuid: attr(),
+  flags: attr(),
   pos_x: attr(),
-  pos_y: attr()
+  pos_y: attr(),
+  engine_status_code: attr()
 });

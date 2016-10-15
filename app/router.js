@@ -12,13 +12,16 @@ Router.map(function() {
   this.route('appliance', { path: '/appliances/:appliance_id' }, function() {
     this.route('edit');
   });
-  this.route('profiles');
+  this.route('profiles', function() {
+    this.route('status');
+  });
   this.route('profile', { path: 'profiles/:profile_id' });
   this.route('lights');
   this.route('light', { path: 'lights/:light_id' });
   this.route('zones', function() {
     this.route('zone', { path: '/:zone_id' });
   });
+  this.route('dashboard');
 });
 
 export default Router;

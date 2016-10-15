@@ -27,6 +27,12 @@ body {
 	background-size: cover;
 }
 
+.dashboard-general-panel {
+	height: 340px;
+	overflow-y: auto;
+	font-size: .8em;
+}
+
 .sk-folding-cube {
   margin: 20px auto;
   width: 80px;

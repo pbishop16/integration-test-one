@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Model from 'ember-pouch/model';
 import attr from 'ember-data/attr';
+import moment from 'moment';
 
 const { computed } = Ember;
 
@@ -11,8 +12,13 @@ export default Model.extend({
   url: Ember.computed('ip', function() {
 
     let ip = this.get('ip');
-    return `${ip}/api`;
+    return `${ip}`;
   }),
+  lightsCount: attr(),
+  profilesCount: attr(),
+  zonesCount: attr(),
+  updatedAt: attr(),
+
   active: attr('boolean'),
   nameNotValid: computed.notEmpty('name'),
   keyNotValid: computed.notEmpty('key'),
